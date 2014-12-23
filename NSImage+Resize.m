@@ -32,11 +32,11 @@
         BOOL fill = contentMode == SWViewContentModeScaleAspectFill;
         BOOL h = ratioH >= ratioW;
         if ((fill && !h) || (h && !fill)) {
-            cropRect.size.width = floor (size.width / ratioH);
-            cropRect.size.height = self.size.height;
-        } else {
             cropRect.size.width = self.size.width;
             cropRect.size.height = floor(size.height / ratioW);
+        } else {
+            cropRect.size.width = floor (size.width / ratioH);
+            cropRect.size.height = self.size.height;
         }
     }
     
