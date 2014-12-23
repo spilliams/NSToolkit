@@ -7,11 +7,11 @@
 
 #import "NSImage+Resize.h"
 
-#define LOG YES
-
 @implementation NSImage(Resize)
 - (NSImage *)resizedToSize:(NSSize)size usingContentMode:(SWViewContentMode)contentMode
 {
+    // Informed by http://stackoverflow.com/a/18063883/1167833
+    
     NSRect targetFrame = NSMakeRect(0, 0, size.width, size.height);
     NSImage*  targetImage = [[NSImage alloc] initWithSize:size];
     
@@ -22,15 +22,13 @@
     
     // we don't have to do anything for UCViewContentModeScaleToFill
     if (contentMode != SWViewContentModeScaleToFill) {
-        // this was made with the help of the following truth table,
-        // where "A" is "scale to height" and "B" is "scale to width"
+        // this next bit was made with the help of the following truth table
         //
-        // fill?    H>=W?   block
-        //   T        T     A
-        //   T        F     B
-        //   F        T     B
-        //   F        F     A
-        // ABBA! So we'll key on an exclusive-or
+        // fill?    H>=W?   scale to:
+        //   T        T     height
+        //   T        F     width
+        //   F        T     width
+        //   F        F     height
         BOOL fill = contentMode == SWViewContentModeScaleAspectFill;
         BOOL h = ratioH >= ratioW;
         if ((fill && !h) || (h && !fill)) {

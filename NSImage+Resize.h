@@ -19,7 +19,6 @@ typedef NS_ENUM(NSInteger, SWViewContentMode) {
 /// NSImage helpers
 @interface NSImage(Resize)
 /// A helper to return a new image based on the receiver, but fitting within a new size.
-/// Informed by http://stackoverflow.com/a/18063883/1167833
 /// @param  size    The new size of the image
 /// @param  contentMode The content mode to use during the resize
 /// @return The resized image
