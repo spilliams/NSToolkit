@@ -22,5 +22,5 @@ typedef NS_ENUM(NSInteger, SWViewContentMode) {
 /// @param  size    The new size of the image
 /// @param  contentMode The content mode to use during the resize
 /// @return The resized image
-- (NSImage *)resizedToSize:(NSSize)size usingContentMode:(UCViewContentMode)contentMode;
+- (NSImage *)resizedToSize:(NSSize)size usingContentMode:(SWViewContentMode)contentMode;
 @end
