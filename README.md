@@ -13,6 +13,8 @@ Want to use a thing from this collection?
 #BRIEF DESCRIPTION OF CONTENTS
 
 - `NSImage+Resize`: A simple category with a method that returns a resized copy of the receiver. Allows for 3 content modes ("scale to fill", "aspect fill" and "aspect fit").
+- `NSString+SizeWithFont`: A simple category to get the size of a string using a certain font, and a maximum size constraint.
+- `NSString+Validation`: A simple category with some validation methods for strings.
 
 #LICENCE
 
