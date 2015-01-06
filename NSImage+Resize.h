@@ -7,13 +7,20 @@
 
 #import <AppKit/AppKit.h>
 
-typedef NS_ENUM(NSInteger, SWViewContentMode) {
+typedef NS_ENUM(NSInteger, ViewScalingMode) {
     /// Scales width and height separately so image fills the container. Image may not retain aspect ratio.
-    SWViewContentModeScaleToFill,
+    ViewScalingModeScaleToFill,
     /// Scales the image up or down so that it fits entirely in the container (Either image width or height will match the container, the other will be smaller). Image retains aspect ratio.
-    SWViewContentModeScaleAspectFit,
+    ViewScalingModeScaleAspectFit,
     /// Scales the image up or down so that it entirely fills the container (Either image width or height will match the container, the other will be larger). Image retains aspect ratio.
-    SWViewContentModeScaleAspectFill
+    ViewScalingModeScaleAspectFill
+};
+
+typedef NS_OPTIONS(NSUInteger, ViewSizingMode) {
+    /// Allows the view to scale up
+    ViewSizingModeUp = 1 << 0,
+    /// Allows the view to scale down
+    ViewSizingModeDown = 1 << 1
 };
 
 /// NSImage helpers
@@ -22,5 +29,11 @@ typedef NS_ENUM(NSInteger, SWViewContentMode) {
 /// @param  size    The new size of the image
 /// @param  contentMode The content mode to use during the resize
 /// @return The resized image
-- (NSImage *)resizedToSize:(NSSize)size usingContentMode:(SWViewContentMode)contentMode;
+- (NSImage *)resizedToSize:(NSSize)size usingScalingMode:(ViewScalingMode)scalingMode;
+/// A helper to return a new image based on the receiver, but fitting within a new size.
+/// @param  size    The new size of the image
+/// @param  contentMode The content mode to use during the resize
+/// @param  sizingMode  The sizing mode to use during the resize
+/// @return The resized image
+- (NSImage *)resizedToSize:(NSSize)size usingScalingMode:(ViewScalingMode)scalingMode sizingMode:(ViewSizingMode)sizingMode;
 @end
