@@ -7,24 +7,20 @@
 //
 
 #import "ViewController.h"
-#import "SWScalingTextField.h"
-
-typedef NS_ENUM(NSInteger, LockType) {
-    LockTypeNoLock = 0,
-    LockTypeWidth,
-    LockTypeHeight,
-    LockTypeAspectRatio
-};
 
 @interface ViewController () {
+    BOOL locked;
     BOOL resized;
 }
 @property (weak) IBOutlet SWScalingTextField *textField;
 @property (weak) IBOutlet NSLayoutConstraint *superviewWidthConstraint;
 @property (weak) IBOutlet NSLayoutConstraint *superviewHeightConstraint;
 @property (weak) IBOutlet NSPopUpButton *lockSelection;
+@property (weak) IBOutlet NSTextField *fontSizeLabel;
+@property (weak) IBOutlet NSTextField *minPtSize;
 
 - (IBAction)resizeButtonPushed:(id)sender;
+- (IBAction)toggleLockPushed:(id)sender;
 @end
 
 @implementation ViewController
@@ -39,24 +35,28 @@ typedef NS_ENUM(NSInteger, LockType) {
 - (IBAction)resizeButtonPushed:(id)sender {
     CGFloat newSize = resized ? 400 : 200;
     
-    LockType l = self.lockSelection.selectedTag;
-    switch (l) {
-        case LockTypeNoLock:
-            break;
-        case LockTypeWidth:
-            [self.textField lockWidth];
-            break;
-        case LockTypeHeight:
-            [self.textField lockHeight];
-            break;
-        case LockTypeAspectRatio:
-            [self.textField lockAspectRatio];
-            break;
-    }
+    [self.textField setMinimumPointSize:self.minPtSize.floatValue];
     
     [[self.superviewWidthConstraint animator] setConstant:newSize];
     
     resized = !resized;
-    [self.textField performSelector:@selector(unlockAll) withObject:nil afterDelay:0.5];
+}
+
+- (IBAction)toggleLockPushed:(id)sender {
+    if (locked) {
+        [self.textField unlockAspectRatio];
+        locked = NO;
+        return;
+    }
+    
+    if (self.lockSelection.selectedTag == 1) {
+        [self.textField lockAspectRatio];
+    }
+}
+
+#pragma mark - Scaling Delegate
+
+- (void)scalingTextField:(SWScalingTextField *)scalingTextField changedFontToPointSize:(CGFloat)pointSize {
+    [self.fontSizeLabel setStringValue:[NSString stringWithFormat:@"%.2f", pointSize]];
 }
 @end

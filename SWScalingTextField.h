@@ -7,21 +7,28 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SWScalingTextField;
+
+@protocol SWScalingTextFieldDelegate <NSObject>
+@optional
+/// Notifies the responder that the given scalingTextField has changed its font to a new point size
+/// @param scalingTextField The scaling text field
+/// @param pointSize        The new point size
+- (void)scalingTextField:(SWScalingTextField *)scalingTextField changedFontToPointSize:(CGFloat)pointSize;
+@end
+
 /** A subclass of NSTextField that manages the shrinking of text as the field resizes.
  
  Usually a text field will size itself according to its string value and font. But with this class, you can lock one of the dimensions (width or height), then change the other, and the string will resize as the field resizes. You can't lock both width and height.
  */
 @interface SWScalingTextField : NSTextField
-/// @return Whether or not the width was successfully locked
-- (BOOL)lockWidth;
-- (void)unlockWidth;
-/// @return Whether or not the height was successfully locked
-- (BOOL)lockHeight;
-- (void)unlockHeight;
+/// Adds an aspect ratio constraint to the text field.
 /// @return Whether or not the aspect ratio was successfully locked
 - (BOOL)lockAspectRatio;
+/// Unlocks the aspect ratio
 - (void)unlockAspectRatio;
-- (void)unlockAll;
 /// The minimum point size for the string in this text field
 @property (assign) CGFloat minimumPointSize;
+/// The delegate
+@property (weak) IBOutlet id<SWScalingTextFieldDelegate> scalingDelegate;
 @end

@@ -10,6 +10,8 @@
 
 #define LOG YES
 
+#define kCorrectionFactor (13/14.25)
+
 @implementation NSString(SizeHelpers)
 - (CGSize)sizeWithFont:(NSFont *)font maxWidth:(CGFloat)maxWidth
 {
@@ -54,7 +56,7 @@
         if (LOG) NSLog(@"  l %.2f m %.2f h %.2f, r %.4f p %.4f",
                        low, mid, high,
                        rectSize.height, preferredSize.height);
-        if (preferredSize.height == rectSize.height) return mid;
+        if (preferredSize.height == rectSize.height) return mid*kCorrectionFactor;
         
         if (preferredSize.height <= rectSize.height) {
             low = mid+d;
@@ -63,7 +65,7 @@
         }
     }
     
-    if (LOG) NSLog(@"  mid: %.2f", mid);
-    return mid;
+    if (LOG) NSLog(@"  mid: %.2f (corrected %.2f)", mid, mid*kCorrectionFactor);
+    return mid*kCorrectionFactor;
 }
 @end

@@ -9,12 +9,11 @@
 #import "NSString+SizeHelpers.h"
 
 #define kDefaultMinimumPointSize 2
+#define LOG YES
 
 #define AreaOfRect(r) (r.size.width*r.size.height)
 
 @interface SWScalingTextField ()
-@property (strong) NSLayoutConstraint *widthLock;
-@property (strong) NSLayoutConstraint *heightLock;
 @property (strong) NSLayoutConstraint *aspectRatioLock;
 @end
 
@@ -53,54 +52,32 @@
     // such that a string with that font would not overflow the dirtyRect's bounds.
     // We want to pick the maximum point size that meets this condition.
     CGFloat newPointSize = [self.stringValue largestPointSizeThatFitsSize:dirtyRect.size withFont:self.font minimumPointSize:self.minimumPointSize];
-    self.font = [NSFont fontWithName:self.font.fontName size:newPointSize];
+    if (newPointSize != self.font.pointSize) {
+        self.font = [NSFont fontWithName:self.font.fontName size:newPointSize];
+        if (self.scalingDelegate
+            && [self.scalingDelegate respondsToSelector:@selector(scalingTextField:changedFontToPointSize:)]) {
+            [self.scalingDelegate scalingTextField:self changedFontToPointSize:newPointSize];
+        }
+    }
     
     [super drawRect:dirtyRect];
 }
 
 #pragma mark - Lock
 
-- (BOOL)lockWidth {
-    if (self.widthLock != nil
-        || self.heightLock != nil
-        || self.aspectRatioLock != nil) return NO;
-    self.widthLock = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:self.frame.size.width];
-    [self addConstraint:self.widthLock];
-    return YES;
-}
-- (void)unlockWidth {
-    [self removeConstraint:self.widthLock];
-    self.widthLock = nil;
-}
-- (BOOL)lockHeight {
-    if (self.widthLock != nil
-        || self.heightLock != nil
-        || self.aspectRatioLock != nil) return NO;
-    self.heightLock = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:self.frame.size.height];
-    [self addConstraint:self.heightLock];
-    return YES;
-}
-- (void)unlockHeight {
-    [self removeConstraint:self.heightLock];
-    self.heightLock = nil;
-}
 - (BOOL)lockAspectRatio {
-    if (self.widthLock != nil
-        || self.heightLock != nil
-        || self.aspectRatioLock != nil) return NO;
+    if (self.aspectRatioLock != nil) return NO;
+    
+    if (LOG) NSLog(@"[STF] locking aspect ratio");
     CGFloat aspectRatio = self.frame.size.width / self.frame.size.height;
     self.aspectRatioLock = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:aspectRatio constant:0];
     [self addConstraint:self.aspectRatioLock];
     return YES;
 }
 - (void)unlockAspectRatio {
+    if (LOG) NSLog(@"[STF] unlocking aspect ratio");
     [self removeConstraint:self.aspectRatioLock];
     self.aspectRatioLock = nil;
-}
-- (void)unlockAll {
-    [self unlockWidth];
-    [self unlockHeight];
-    [self unlockAspectRatio];
 }
 
 @end

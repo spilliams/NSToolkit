@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SWScalingTextField.h"
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController <SWScalingTextFieldDelegate>
 
 
 @end

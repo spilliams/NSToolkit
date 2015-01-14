@@ -690,6 +690,9 @@
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <outlet property="scalingDelegate" destination="XfG-lQ-9wD" id="iMF-xS-0aL"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -714,13 +717,7 @@
                                             <menuItem title="No Lock" state="on" id="Std-ai-4Jf">
                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                             </menuItem>
-                                            <menuItem title="Lock Width" tag="1" id="xrl-Pt-U8e">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                            <menuItem title="Lock Height" tag="2" id="xht-Pm-6ze">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                            <menuItem title="Lock Aspect Ratio" tag="3" id="nI0-Am-aSa">
+                                            <menuItem title="Lock Aspect Ratio" tag="1" id="nI0-Am-aSa">
                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                             </menuItem>
                                         </items>
@@ -737,18 +734,74 @@
                                     <action selector="resizeButtonPushed:" target="XfG-lQ-9wD" id="3If-GU-guA"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XlG-Re-jNp">
+                                <rect key="frame" x="251" y="23" width="66" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font Size:" id="PAv-EB-b0p">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hej-5H-qtB">
+                                <rect key="frame" x="323" y="23" width="38" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="KME-bq-wCB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uea-Jy-tLZ">
+                                <rect key="frame" x="164" y="41" width="115" height="32"/>
+                                <buttonCell key="cell" type="push" title="Toggle Lock" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qTN-Ek-wrA">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="toggleLockPushed:" target="XfG-lQ-9wD" id="HOB-JG-exX"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mik-PU-hsH">
+                                <rect key="frame" x="20" y="50" width="82" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Min. Pt Size:" id="1rI-Ug-6QY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5nT-rP-92T">
+                                <rect key="frame" x="108" y="48" width="54" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="2" drawsBackground="YES" id="GgI-zX-NeS">
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="T1C-tF-EFf"/>
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="3v5-TZ-OR5" firstAttribute="top" secondItem="Mik-PU-hsH" secondAttribute="bottom" constant="9" id="6VH-cJ-h5l"/>
+                            <constraint firstItem="hej-5H-qtB" firstAttribute="leading" secondItem="XlG-Re-jNp" secondAttribute="trailing" constant="10" id="6an-DS-Uso"/>
+                            <constraint firstItem="3v5-TZ-OR5" firstAttribute="top" secondItem="5nT-rP-92T" secondAttribute="bottom" constant="7" id="86j-RQ-epf"/>
+                            <constraint firstItem="5nT-rP-92T" firstAttribute="leading" secondItem="Mik-PU-hsH" secondAttribute="trailing" constant="8" id="Eq7-fK-P11"/>
+                            <constraint firstItem="XlG-Re-jNp" firstAttribute="leading" secondItem="QJ0-6d-wbq" secondAttribute="trailing" constant="10" id="HQa-lJ-Efr"/>
                             <constraint firstItem="3v5-TZ-OR5" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="HhQ-Bh-Ahp"/>
+                            <constraint firstItem="3v5-TZ-OR5" firstAttribute="trailing" secondItem="5nT-rP-92T" secondAttribute="trailing" id="JTb-Nb-uX5"/>
+                            <constraint firstItem="QJ0-6d-wbq" firstAttribute="leading" secondItem="Uea-Jy-tLZ" secondAttribute="leading" id="NKm-mB-RTD"/>
                             <constraint firstItem="QJ0-6d-wbq" firstAttribute="leading" secondItem="3v5-TZ-OR5" secondAttribute="trailing" constant="8" id="OyF-GM-XoW"/>
+                            <constraint firstAttribute="bottom" secondItem="XlG-Re-jNp" secondAttribute="bottom" constant="23" id="PAq-Z2-jJo"/>
+                            <constraint firstItem="QJ0-6d-wbq" firstAttribute="top" secondItem="Uea-Jy-tLZ" secondAttribute="bottom" constant="7" id="VxO-KN-PaS"/>
                             <constraint firstAttribute="bottom" secondItem="3v5-TZ-OR5" secondAttribute="bottom" constant="20" id="WHA-47-Czw"/>
+                            <constraint firstItem="Mik-PU-hsH" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="22" id="ZrB-0m-FXb"/>
                             <constraint firstItem="ffh-mE-VQr" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="dDm-F5-QxV"/>
+                            <constraint firstAttribute="bottom" secondItem="hej-5H-qtB" secondAttribute="bottom" constant="23" id="slT-zK-JZK"/>
                             <constraint firstItem="ffh-mE-VQr" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="wZY-H2-xkM"/>
                             <constraint firstAttribute="bottom" secondItem="QJ0-6d-wbq" secondAttribute="bottom" constant="20" id="yTn-kc-ZrM"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="fontSizeLabel" destination="hej-5H-qtB" id="UIP-as-GSi"/>
                         <outlet property="lockSelection" destination="3v5-TZ-OR5" id="Rha-fb-fxA"/>
+                        <outlet property="minPtSize" destination="5nT-rP-92T" id="zpb-T4-7RH"/>
                         <outlet property="superviewHeightConstraint" destination="SwF-f2-0Du" id="bEJ-Xr-aS8"/>
                         <outlet property="superviewWidthConstraint" destination="DdG-aY-Bse" id="vWK-hg-zgF"/>
                         <outlet property="textField" destination="xvj-rH-nDZ" id="gls-uT-Rb7"/>
