@@ -9,12 +9,13 @@
 #import "NSString+SizeHelpers.h"
 
 #define kDefaultMinimumPointSize 2
-#define LOG YES
+#define LOG NO
 
 #define AreaOfRect(r) (r.size.width*r.size.height)
 
 @interface SWScalingTextField ()
 @property (strong) NSLayoutConstraint *aspectRatioLock;
+@property (assign) CGFloat correctionFactor;
 @end
 
 @implementation SWScalingTextField
@@ -41,17 +42,29 @@
 }
 - (void)commonInit {
     self.minimumPointSize = kDefaultMinimumPointSize;
+    self.correctionFactor = -1;
+}
+- (void)initializeCorrectionFactor {
+    if (self.correctionFactor != -1) return;
+    
+    // we have a frame and a font.pointSize
+    // we'll call largestPointSize... and that will PROBABLY return
+    // something larger than current pointSize.
+    // correctionFactor is here to correct that.
+    CGFloat fakePointSize = [self.stringValue largestPointSizeThatFitsSize:self.frame.size withFont:self.font minimumPointSize:self.minimumPointSize];
+    self.correctionFactor = self.font.pointSize / fakePointSize;
 }
 
 #pragma mark - Draw
 
 - (void)drawRect:(NSRect)dirtyRect {
-    NSLog(@"[STF] draw rect: %@, current frame: %@, current point size: %.2f", NSStringFromRect(dirtyRect), NSStringFromRect(self.frame), self.font.pointSize);
+    if (LOG) NSLog(@"[STF] draw rect: %@, current frame: %@, current point size: %.2f", NSStringFromRect(dirtyRect), NSStringFromRect(self.frame), self.font.pointSize);
     
-    // We want to change self's font with a font of the same name and a new size,
-    // such that a string with that font would not overflow the dirtyRect's bounds.
-    // We want to pick the maximum point size that meets this condition.
+    [self initializeCorrectionFactor];
+    
     CGFloat newPointSize = [self.stringValue largestPointSizeThatFitsSize:dirtyRect.size withFont:self.font minimumPointSize:self.minimumPointSize];
+    newPointSize *= self.correctionFactor;
+    if (newPointSize < self.minimumPointSize) newPointSize = self.minimumPointSize;
     if (newPointSize != self.font.pointSize) {
         self.font = [NSFont fontWithName:self.font.fontName size:newPointSize];
         if (self.scalingDelegate
