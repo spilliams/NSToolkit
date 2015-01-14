@@ -1,5 +1,5 @@
 //
-//  NSString+SizeWithFont.h
+//  NSString+SizeHelpers.h
 //
 //  Created by Spencer Williams on 10/14/14.
 //  This is free and unencumbered software released into the public domain.
