@@ -21,6 +21,7 @@
 /// @return Whether or not the aspect ratio was successfully locked
 - (BOOL)lockAspectRatio;
 - (void)unlockAspectRatio;
+- (void)unlockAll;
 /// The minimum point size for the string in this text field
 @property (assign) CGFloat minimumPointSize;
 @end

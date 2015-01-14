@@ -6,8 +6,11 @@
 //
 
 #import "SWScalingTextField.h"
+#import "NSString+SizeHelpers.h"
 
 #define kDefaultMinimumPointSize 2
+
+#define AreaOfRect(r) (r.size.width*r.size.height)
 
 @interface SWScalingTextField ()
 @property (strong) NSLayoutConstraint *widthLock;
@@ -16,6 +19,8 @@
 @end
 
 @implementation SWScalingTextField
+
+#pragma mark - Initialize
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -38,6 +43,22 @@
 - (void)commonInit {
     self.minimumPointSize = kDefaultMinimumPointSize;
 }
+
+#pragma mark - Draw
+
+- (void)drawRect:(NSRect)dirtyRect {
+    NSLog(@"[STF] draw rect: %@, current frame: %@, current point size: %.2f", NSStringFromRect(dirtyRect), NSStringFromRect(self.frame), self.font.pointSize);
+    
+    // We want to change self's font with a font of the same name and a new size,
+    // such that a string with that font would not overflow the dirtyRect's bounds.
+    // We want to pick the maximum point size that meets this condition.
+    CGFloat newPointSize = [self.stringValue largestPointSizeThatFitsSize:dirtyRect.size withFont:self.font minimumPointSize:self.minimumPointSize];
+    self.font = [NSFont fontWithName:self.font.fontName size:newPointSize];
+    
+    [super drawRect:dirtyRect];
+}
+
+#pragma mark - Lock
 
 - (BOOL)lockWidth {
     if (self.widthLock != nil
@@ -75,6 +96,11 @@
 - (void)unlockAspectRatio {
     [self removeConstraint:self.aspectRatioLock];
     self.aspectRatioLock = nil;
+}
+- (void)unlockAll {
+    [self unlockWidth];
+    [self unlockHeight];
+    [self unlockAspectRatio];
 }
 
 @end

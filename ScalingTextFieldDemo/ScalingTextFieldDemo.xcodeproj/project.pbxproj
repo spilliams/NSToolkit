@@ -14,6 +14,7 @@
 		09C3BBE91A65F262003F397B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09C3BBE71A65F262003F397B /* Main.storyboard */; };
 		09C3BBF51A65F263003F397B /* ScalingTextFieldDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3BBF41A65F263003F397B /* ScalingTextFieldDemoTests.m */; };
 		09C3BC001A65F280003F397B /* SWScalingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3BBFF1A65F280003F397B /* SWScalingTextField.m */; };
+		09C3BC0F1A65FC1E003F397B /* NSString+SizeHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3BC0E1A65FC1E003F397B /* NSString+SizeHelpers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,8 @@
 		09C3BBF41A65F263003F397B /* ScalingTextFieldDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScalingTextFieldDemoTests.m; sourceTree = "<group>"; };
 		09C3BBFE1A65F280003F397B /* SWScalingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWScalingTextField.h; path = ../../SWScalingTextField.h; sourceTree = "<group>"; };
 		09C3BBFF1A65F280003F397B /* SWScalingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWScalingTextField.m; path = ../../SWScalingTextField.m; sourceTree = "<group>"; };
+		09C3BC0D1A65FC1E003F397B /* NSString+SizeHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+SizeHelpers.h"; path = "../../NSString+SizeHelpers.h"; sourceTree = "<group>"; };
+		09C3BC0E1A65FC1E003F397B /* NSString+SizeHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+SizeHelpers.m"; path = "../../NSString+SizeHelpers.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 				09C3BBE31A65F262003F397B /* ViewController.m */,
 				09C3BBFE1A65F280003F397B /* SWScalingTextField.h */,
 				09C3BBFF1A65F280003F397B /* SWScalingTextField.m */,
+				09C3BC0D1A65FC1E003F397B /* NSString+SizeHelpers.h */,
+				09C3BC0E1A65FC1E003F397B /* NSString+SizeHelpers.m */,
 				09C3BBE51A65F262003F397B /* Images.xcassets */,
 				09C3BBE71A65F262003F397B /* Main.storyboard */,
 				09C3BBDB1A65F262003F397B /* Supporting Files */,
@@ -222,6 +227,7 @@
 			files = (
 				09C3BBE41A65F262003F397B /* ViewController.m in Sources */,
 				09C3BBE11A65F262003F397B /* main.m in Sources */,
+				09C3BC0F1A65FC1E003F397B /* NSString+SizeHelpers.m in Sources */,
 				09C3BBDF1A65F262003F397B /* AppDelegate.m in Sources */,
 				09C3BC001A65F280003F397B /* SWScalingTextField.m in Sources */,
 			);
