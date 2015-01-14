@@ -39,8 +39,8 @@
 		091684311A53FEE800B823A7 /* Scale Slider DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Scale Slider DemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		091684361A53FEE800B823A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		091684371A53FEE800B823A7 /* Scale_Slider_DemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Scale_Slider_DemoTests.m; sourceTree = "<group>"; };
-		091684411A53FEFA00B823A7 /* SWScalingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScalingSlider.h; sourceTree = "<group>"; };
-		091684421A53FEFA00B823A7 /* SWScalingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWScalingSlider.m; sourceTree = "<group>"; };
+		091684411A53FEFA00B823A7 /* SWScalingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWScalingSlider.h; path = ../../SWScalingSlider.h; sourceTree = "<group>"; };
+		091684421A53FEFA00B823A7 /* SWScalingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWScalingSlider.m; path = ../../SWScalingSlider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +410,7 @@
 				0916843D1A53FEE800B823A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0916843E1A53FEE800B823A7 /* Build configuration list for PBXNativeTarget "Scale Slider DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +419,7 @@
 				091684401A53FEE800B823A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

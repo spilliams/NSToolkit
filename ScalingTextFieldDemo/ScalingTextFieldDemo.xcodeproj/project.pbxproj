@@ -1,0 +1,425 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09C3BBDF1A65F262003F397B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3BBDE1A65F262003F397B /* AppDelegate.m */; };
+		09C3BBE11A65F262003F397B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3BBE01A65F262003F397B /* main.m */; };
+		09C3BBE41A65F262003F397B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3BBE31A65F262003F397B /* ViewController.m */; };
+		09C3BBE61A65F262003F397B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09C3BBE51A65F262003F397B /* Images.xcassets */; };
+		09C3BBE91A65F262003F397B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09C3BBE71A65F262003F397B /* Main.storyboard */; };
+		09C3BBF51A65F263003F397B /* ScalingTextFieldDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3BBF41A65F263003F397B /* ScalingTextFieldDemoTests.m */; };
+		09C3BC001A65F280003F397B /* SWScalingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3BBFF1A65F280003F397B /* SWScalingTextField.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		09C3BBEF1A65F263003F397B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 09C3BBD01A65F262003F397B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 09C3BBD71A65F262003F397B;
+			remoteInfo = ScalingTextFieldDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		09C3BBD81A65F262003F397B /* ScalingTextFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScalingTextFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C3BBDC1A65F262003F397B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09C3BBDD1A65F262003F397B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		09C3BBDE1A65F262003F397B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		09C3BBE01A65F262003F397B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		09C3BBE21A65F262003F397B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		09C3BBE31A65F262003F397B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		09C3BBE51A65F262003F397B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		09C3BBE81A65F262003F397B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		09C3BBEE1A65F263003F397B /* ScalingTextFieldDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScalingTextFieldDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C3BBF31A65F263003F397B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09C3BBF41A65F263003F397B /* ScalingTextFieldDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScalingTextFieldDemoTests.m; sourceTree = "<group>"; };
+		09C3BBFE1A65F280003F397B /* SWScalingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWScalingTextField.h; path = ../../SWScalingTextField.h; sourceTree = "<group>"; };
+		09C3BBFF1A65F280003F397B /* SWScalingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWScalingTextField.m; path = ../../SWScalingTextField.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		09C3BBD51A65F262003F397B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09C3BBEB1A65F263003F397B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		09C3BBCF1A65F262003F397B = {
+			isa = PBXGroup;
+			children = (
+				09C3BBDA1A65F262003F397B /* ScalingTextFieldDemo */,
+				09C3BBF11A65F263003F397B /* ScalingTextFieldDemoTests */,
+				09C3BBD91A65F262003F397B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		09C3BBD91A65F262003F397B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				09C3BBD81A65F262003F397B /* ScalingTextFieldDemo.app */,
+				09C3BBEE1A65F263003F397B /* ScalingTextFieldDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		09C3BBDA1A65F262003F397B /* ScalingTextFieldDemo */ = {
+			isa = PBXGroup;
+			children = (
+				09C3BBDD1A65F262003F397B /* AppDelegate.h */,
+				09C3BBDE1A65F262003F397B /* AppDelegate.m */,
+				09C3BBE21A65F262003F397B /* ViewController.h */,
+				09C3BBE31A65F262003F397B /* ViewController.m */,
+				09C3BBFE1A65F280003F397B /* SWScalingTextField.h */,
+				09C3BBFF1A65F280003F397B /* SWScalingTextField.m */,
+				09C3BBE51A65F262003F397B /* Images.xcassets */,
+				09C3BBE71A65F262003F397B /* Main.storyboard */,
+				09C3BBDB1A65F262003F397B /* Supporting Files */,
+			);
+			path = ScalingTextFieldDemo;
+			sourceTree = "<group>";
+		};
+		09C3BBDB1A65F262003F397B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				09C3BBDC1A65F262003F397B /* Info.plist */,
+				09C3BBE01A65F262003F397B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		09C3BBF11A65F263003F397B /* ScalingTextFieldDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				09C3BBF41A65F263003F397B /* ScalingTextFieldDemoTests.m */,
+				09C3BBF21A65F263003F397B /* Supporting Files */,
+			);
+			path = ScalingTextFieldDemoTests;
+			sourceTree = "<group>";
+		};
+		09C3BBF21A65F263003F397B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				09C3BBF31A65F263003F397B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		09C3BBD71A65F262003F397B /* ScalingTextFieldDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09C3BBF81A65F263003F397B /* Build configuration list for PBXNativeTarget "ScalingTextFieldDemo" */;
+			buildPhases = (
+				09C3BBD41A65F262003F397B /* Sources */,
+				09C3BBD51A65F262003F397B /* Frameworks */,
+				09C3BBD61A65F262003F397B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScalingTextFieldDemo;
+			productName = ScalingTextFieldDemo;
+			productReference = 09C3BBD81A65F262003F397B /* ScalingTextFieldDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		09C3BBED1A65F263003F397B /* ScalingTextFieldDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09C3BBFB1A65F263003F397B /* Build configuration list for PBXNativeTarget "ScalingTextFieldDemoTests" */;
+			buildPhases = (
+				09C3BBEA1A65F263003F397B /* Sources */,
+				09C3BBEB1A65F263003F397B /* Frameworks */,
+				09C3BBEC1A65F263003F397B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				09C3BBF01A65F263003F397B /* PBXTargetDependency */,
+			);
+			name = ScalingTextFieldDemoTests;
+			productName = ScalingTextFieldDemoTests;
+			productReference = 09C3BBEE1A65F263003F397B /* ScalingTextFieldDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		09C3BBD01A65F262003F397B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Spencer Williams";
+				TargetAttributes = {
+					09C3BBD71A65F262003F397B = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					09C3BBED1A65F263003F397B = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 09C3BBD71A65F262003F397B;
+					};
+				};
+			};
+			buildConfigurationList = 09C3BBD31A65F262003F397B /* Build configuration list for PBXProject "ScalingTextFieldDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 09C3BBCF1A65F262003F397B;
+			productRefGroup = 09C3BBD91A65F262003F397B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				09C3BBD71A65F262003F397B /* ScalingTextFieldDemo */,
+				09C3BBED1A65F263003F397B /* ScalingTextFieldDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		09C3BBD61A65F262003F397B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09C3BBE61A65F262003F397B /* Images.xcassets in Resources */,
+				09C3BBE91A65F262003F397B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09C3BBEC1A65F263003F397B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		09C3BBD41A65F262003F397B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09C3BBE41A65F262003F397B /* ViewController.m in Sources */,
+				09C3BBE11A65F262003F397B /* main.m in Sources */,
+				09C3BBDF1A65F262003F397B /* AppDelegate.m in Sources */,
+				09C3BC001A65F280003F397B /* SWScalingTextField.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09C3BBEA1A65F263003F397B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09C3BBF51A65F263003F397B /* ScalingTextFieldDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		09C3BBF01A65F263003F397B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 09C3BBD71A65F262003F397B /* ScalingTextFieldDemo */;
+			targetProxy = 09C3BBEF1A65F263003F397B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		09C3BBE71A65F262003F397B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09C3BBE81A65F262003F397B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		09C3BBF61A65F263003F397B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		09C3BBF71A65F263003F397B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		09C3BBF91A65F263003F397B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ScalingTextFieldDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		09C3BBFA1A65F263003F397B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ScalingTextFieldDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		09C3BBFC1A65F263003F397B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ScalingTextFieldDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScalingTextFieldDemo.app/Contents/MacOS/ScalingTextFieldDemo";
+			};
+			name = Debug;
+		};
+		09C3BBFD1A65F263003F397B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ScalingTextFieldDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScalingTextFieldDemo.app/Contents/MacOS/ScalingTextFieldDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		09C3BBD31A65F262003F397B /* Build configuration list for PBXProject "ScalingTextFieldDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09C3BBF61A65F263003F397B /* Debug */,
+				09C3BBF71A65F263003F397B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		09C3BBF81A65F263003F397B /* Build configuration list for PBXNativeTarget "ScalingTextFieldDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09C3BBF91A65F263003F397B /* Debug */,
+				09C3BBFA1A65F263003F397B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		09C3BBFB1A65F263003F397B /* Build configuration list for PBXNativeTarget "ScalingTextFieldDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09C3BBFC1A65F263003F397B /* Debug */,
+				09C3BBFD1A65F263003F397B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 09C3BBD01A65F262003F397B /* Project object */;
+}
