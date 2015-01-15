@@ -35,6 +35,7 @@
     // determine high using binary search
     NSFont *highFont = [NSFont fontWithName:font.fontName size:high];
     while ([self sizeWithFont:highFont maxWidth:rectSize.width].height <= rectSize.height) {
+        if (LOG) NSLog(@"    trying %.2f. size is %@", high, NSStringFromSize([self sizeWithFont:highFont maxWidth:rectSize.width]));
         high = high * 2.0;
         highFont = [NSFont fontWithName:font.fontName size:high];
     }
