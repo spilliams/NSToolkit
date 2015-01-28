@@ -7,7 +7,7 @@
 
 #import "NSImage+Resize.h"
 
-#define LOG YES
+#define LOG NO
 
 @implementation NSImage(Resize)
 - (NSImage *)resizedToSize:(NSSize)size usingScalingMode:(ViewScalingMode)scalingMode {
