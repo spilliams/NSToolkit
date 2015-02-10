@@ -1,6 +1,5 @@
 //
 //  NSString+FormatHelpers.m
-//  CurrentScience
 //
 //  Created by Spencer Williams on 1/28/15.
 //  This is free and unencumbered software released into the public domain.

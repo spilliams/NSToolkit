@@ -1,9 +1,8 @@
 //
 //  SWPoller(Protected).h
-//  CurrentScience
 //
 //  Created by Spencer Williams on 2/6/15.
-//  Copyright (c) 2015 Uncorked Studios. All rights reserved.
+//  This is free and unencumbered software released into the public domain.
 //
 
 #ifndef CurrentScience_SWPoller_Protected__h

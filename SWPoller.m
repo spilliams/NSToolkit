@@ -1,6 +1,5 @@
 //
 //  SWPoller.m
-//  CurrentScience
 //
 //  Created by Spencer Williams on 2/5/15.
 //  This is free and unencumbered software released into the public domain.
@@ -27,7 +26,7 @@
 }
 
 - (void)pollOnce {
-    NSLog(@"[Poller] pollOnce");
+//    NSLog(@"[Poller] pollOnce");
     if (staaaahp) return;
     currentlyPolling = YES;
     
