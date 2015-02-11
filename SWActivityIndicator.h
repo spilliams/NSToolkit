@@ -16,7 +16,9 @@
 @protocol SWActivityIndicatorDelegate <NSObject>
 @optional
 - (void)activityIndicatorWillShow:(SWActivityIndicator *)activityIndicator;
+- (void)activityIndicatorDidShow:(SWActivityIndicator *)activityIndicator;
 - (void)activityIndicatorWillHide:(SWActivityIndicator *)activityIndicator;
+- (void)activityIndicatorDidHide:(SWActivityIndicator *)activityIndicator;
 @end
 
 @interface SWActivityIndicator : NSView

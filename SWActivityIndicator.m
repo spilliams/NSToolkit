@@ -101,6 +101,11 @@
     self.counter++;
     [self updateHidden];
     [self.spinner startAnimation:self];
+    
+    if (self.delegate
+        && [self.delegate respondsToSelector:@selector(activityIndicatorDidShow:)]) {
+        [self.delegate activityIndicatorDidShow:self];
+    }
 }
 /// Returns YES if the indicator was hidden, NO if not
 - (BOOL)hide {
@@ -119,10 +124,14 @@
         && [self.delegate respondsToSelector:@selector(activityIndicatorWillHide:)]) {
         [self.delegate activityIndicatorWillHide:self];
     }
+    [self updateHidden];
     if (self.counter == 0) {
         [self.spinner stopAnimation:self];
+        if (self.delegate
+            && [self.delegate respondsToSelector:@selector(activityIndicatorDidHide:)]) {
+            [self.delegate activityIndicatorDidHide:self];
+        }
     }
-    [self updateHidden];
     return self.counter == 0;
 }
 
