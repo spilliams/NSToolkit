@@ -13,6 +13,8 @@
 @property (strong) NSTextField *label;
 @property (strong) NSLayoutConstraint *labelSpinnerDistanceConstraint;
 @property (strong) NSLayoutConstraint *labelSpinnerMarginConstraint;
+@property (strong) NSLayoutConstraint *spinnerWidthConstraint;
+@property (strong) NSLayoutConstraint *spinnerHeightConstraint;
 @end
 
 @implementation SWActivityIndicator
@@ -42,16 +44,16 @@
     [self setHidden:YES];
     self.labelSpinnerMargin = 10;
     self.edgeInsets = NSEdgeInsetsMake(10, 10, 10, 10);
-    self.spinnerSize = CGSizeMake(100, 100);
     
-    NSDictionary *metrics = @{@"left":@(self.edgeInsets.left), @"right":@(self.edgeInsets.right), @"top":@(self.edgeInsets.top), @"bottom":@(self.edgeInsets.bottom), @"spinnerWidth":@(self.spinnerSize.width), @"spinnerHeight":@(self.spinnerSize.height)};
+    NSDictionary *metrics = @{@"left":@(self.edgeInsets.left), @"right":@(self.edgeInsets.right), @"top":@(self.edgeInsets.top), @"bottom":@(self.edgeInsets.bottom)};
     
     if (!self.spinner) {
         self.spinner = [[YRKSpinningProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0, self.spinnerSize.width, self.spinnerSize.height)];
         [self addSubview:self.spinner];
         [self.spinner setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=left)-[spinner(spinnerWidth)]-(>=right)-|" options:0 metrics:metrics views:@{@"spinner":self.spinner}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=top)-[spinner(spinnerHeight)]-(>=bottom)-|" options:0 metrics:metrics views:@{@"spinner":self.spinner}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=left)-[spinner]-(>=right)-|" options:0 metrics:metrics views:@{@"spinner":self.spinner}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=top)-[spinner]-(>=bottom)-|" options:0 metrics:metrics views:@{@"spinner":self.spinner}]];
+        self.spinnerSize = CGSizeMake(100, 100);
     }
     
     if (!self.label) {
@@ -63,7 +65,6 @@
         
         [self.label setDrawsBackground:NO];
         [self.label setBezeled:NO];
-        [self.label setSelectable:NO];
     }
     
     [self updateLabelSpinnerConstraints];
@@ -177,7 +178,6 @@
             break;
     }
     self.labelSpinnerDistanceConstraint = [NSLayoutConstraint constraintWithItem:self.label attribute:labelAttribute relatedBy:NSLayoutRelationEqual toItem:self.spinner attribute:spinnerAttribute multiplier:1.0 constant:self.labelSpinnerMargin];
-    [self addConstraint:self.labelSpinnerDistanceConstraint];
     
     if (self.labelPosition == SWLabelPositionAbove
         || self.labelPosition == SWLabelPositionBelow) {
@@ -185,7 +185,24 @@
     } else {
         self.labelSpinnerMarginConstraint = [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.spinner attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
     }
-    [self addConstraint:self.labelSpinnerMarginConstraint];
+    
+    [self addConstraints:@[self.labelSpinnerMarginConstraint, self.labelSpinnerDistanceConstraint]];
 }
 
+- (void)setSpinnerSize:(CGSize)spinnerSize {
+    _spinnerSize = spinnerSize;
+    [self updateSpinnerConstraints];
+}
+- (void)updateSpinnerConstraints {
+    if (self.spinnerHeightConstraint) {
+        [self.spinner removeConstraint:self.spinnerHeightConstraint];
+    }
+    if (self.spinnerWidthConstraint) {
+        [self.spinner removeConstraint:self.spinnerWidthConstraint];
+    }
+    
+    self.spinnerWidthConstraint = [NSLayoutConstraint constraintWithItem:self.spinner attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:self.spinnerSize.width];
+    self.spinnerHeightConstraint = [NSLayoutConstraint constraintWithItem:self.spinner attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:self.spinnerSize.height];
+    [self.spinner addConstraints:@[self.spinnerWidthConstraint, self.spinnerHeightConstraint]];
+}
 @end
