@@ -93,12 +93,18 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - Show/Hide
+
 - (void)show {
+    NSTimeInterval delay = 0;
     if (self.hidden
         && self.delegate
         && [self.delegate respondsToSelector:@selector(activityIndicatorWillShow:)]) {
-        [self.delegate activityIndicatorWillShow:self];
+        delay = [self.delegate activityIndicatorWillShow:self];
     }
+    [self performSelector:@selector(finishShowing) withObject:nil afterDelay:delay];
+}
+- (void)finishShowing {
     self.counter++;
     [self updateHidden];
     [self.spinner startAnimation:self];
@@ -108,23 +114,26 @@
         [self.delegate activityIndicatorDidShow:self];
     }
 }
-/// Returns YES if the indicator was hidden, NO if not
-- (BOOL)hide {
-    return [self hideForced:NO];
+- (void)hide {
+    [self hideForced:NO];
 }
 - (void)forceHide {
     [self hideForced:YES];
 }
-/// Returns YES if the indicator was hidden, NO if not
-- (BOOL)hideForced:(BOOL)forced {
+- (void)hideForced:(BOOL)forced {
     self.counter--;
     if (forced) self.counter = 0;
     if (self.counter < 0) self.counter = 0;
+    
+    NSTimeInterval delay = 0;
     if (self.counter == 0
         && self.delegate
         && [self.delegate respondsToSelector:@selector(activityIndicatorWillHide:)]) {
-        [self.delegate activityIndicatorWillHide:self];
+        delay = [self.delegate activityIndicatorWillHide:self];
     }
+    [self performSelector:@selector(finishHiding) withObject:nil afterDelay:delay];
+}
+- (void)finishHiding {
     [self updateHidden];
     if (self.counter == 0) {
         [self.spinner stopAnimation:self];
@@ -133,12 +142,12 @@
             [self.delegate activityIndicatorDidHide:self];
         }
     }
-    return self.counter == 0;
 }
-
 - (void)updateHidden {
     [self setHidden:(self.counter == 0)];
 }
+
+#pragma mark - Constraints
 
 - (void)setLabelSpinnerMargin:(CGFloat)labelSpinnerMargin {
     _labelSpinnerMargin = labelSpinnerMargin;
