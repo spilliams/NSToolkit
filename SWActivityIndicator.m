@@ -11,6 +11,8 @@
 @property (assign) int counter;
 @property (strong) YRKSpinningProgressIndicator *spinner;
 @property (strong) NSTextField *label;
+@property (strong) NSLayoutConstraint *labelSpinnerDistanceConstraint;
+@property (strong) NSLayoutConstraint *labelSpinnerMarginConstraint;
 @end
 
 @implementation SWActivityIndicator
@@ -34,60 +36,43 @@
     return self;
 }
 - (void)commonInit {
+    // probably should use a dispatch_once...
+    
     self.counter = 0;
     [self setHidden:YES];
     self.labelSpinnerMargin = 10;
     self.edgeInsets = NSEdgeInsetsMake(10, 10, 10, 10);
     self.spinnerSize = CGSizeMake(100, 100);
     
-    self.spinner = [[YRKSpinningProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0, self.spinnerSize.width, self.spinnerSize.height)];
-    self.label = [[NSTextField alloc] initWithFrame:NSZeroRect];
+    NSDictionary *metrics = @{@"left":@(self.edgeInsets.left), @"right":@(self.edgeInsets.right), @"top":@(self.edgeInsets.top), @"bottom":@(self.edgeInsets.bottom), @"spinnerWidth":@(self.spinnerSize.width), @"spinnerHeight":@(self.spinnerSize.height)};
     
-    [self addSubview:self.spinner];
-    [self addSubview:self.label];
-    
-    [self.spinner setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.label setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSDictionary *metrics = @{@"left":@(self.edgeInsets.left), @"right":@(self.edgeInsets.right), @"top":@(self.edgeInsets.top), @"bottom":@(self.edgeInsets.bottom), @"inter":@(self.labelSpinnerMargin), @"spinnerWidth":@(self.spinnerSize.width), @"spinnerHeight":@(self.spinnerSize.height)};
-    NSDictionary *views = @{@"spinner":self.spinner, @"label":self.label};
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=left)-[spinner(spinnerWidth)]-(>=right)-|" options:0 metrics:metrics views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=top)-[spinner(spinnerHeight)]-(>=bottom)-|" options:0 metrics:metrics views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=left)-[label]-(>=right)-|" options:0 metrics:metrics views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=top)-[label]-(>=bottom)-|" options:0 metrics:metrics views:views]];
-    NSString *labelSpinnerDistance;
-    switch (self.labelPosition) {
-        case SWLabelPositionAbove:
-            labelSpinnerDistance = @"V:[label]-(inter)-[spinner]";
-            break;
-        case SWLabelPositionBelow:
-            labelSpinnerDistance = @"V:[spinner]-(inter)-[label]";
-            break;
-        case SWLabelPositionLeft:
-            labelSpinnerDistance = @"H:[label]-(inter)-[spinner]";
-            break;
-        case SWLabelPositionRight:
-            labelSpinnerDistance = @"H:[spinner]-(inter)-[label]";
-            break;
+    if (!self.spinner) {
+        self.spinner = [[YRKSpinningProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0, self.spinnerSize.width, self.spinnerSize.height)];
+        [self addSubview:self.spinner];
+        [self.spinner setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=left)-[spinner(spinnerWidth)]-(>=right)-|" options:0 metrics:metrics views:@{@"spinner":self.spinner}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=top)-[spinner(spinnerHeight)]-(>=bottom)-|" options:0 metrics:metrics views:@{@"spinner":self.spinner}]];
     }
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:labelSpinnerDistance options:0 metrics:metrics views:views]];
-    if (self.labelPosition == SWLabelPositionAbove
-        || self.labelPosition == SWLabelPositionBelow) {
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.spinner attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
-    } else {
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.spinner attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    if (!self.label) {
+        self.label = [[NSTextField alloc] initWithFrame:NSZeroRect];
+        [self addSubview:self.label];
+        [self.label setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=left)-[label]-(>=right)-|" options:0 metrics:metrics views:@{@"label":self.label}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=top)-[label]-(>=bottom)-|" options:0 metrics:metrics views:@{@"label":self.label}]];
+        
+        [self.label setDrawsBackground:NO];
+        [self.label setBezeled:NO];
+        [self.label setSelectable:NO];
     }
+    
+    [self updateLabelSpinnerConstraints];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(show) name:kSWActivityIndicatorShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hide) name:kSWActivityIndicatorHideNotification object:nil];
-    
-    [self.label setDrawsBackground:NO];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    NSLog(@"[NAI] drawing rect %@", NSStringFromRect(dirtyRect));
-    
     [NSGraphicsContext saveGraphicsState];
     // draw background
     if (self.drawsBackground && self.backgroundColor) {
@@ -143,6 +128,55 @@
 
 - (void)updateHidden {
     [self setHidden:(self.counter == 0)];
+}
+
+- (void)setLabelSpinnerMargin:(CGFloat)labelSpinnerMargin {
+    _labelSpinnerMargin = labelSpinnerMargin;
+    [self.labelSpinnerDistanceConstraint setConstant:labelSpinnerMargin];
+}
+- (void)setLabelPosition:(SWLabelPosition)labelPosition {
+    _labelPosition = labelPosition;
+    [self updateLabelSpinnerConstraints];
+}
+
+- (void)updateLabelSpinnerConstraints {
+    if (self.labelSpinnerDistanceConstraint) {
+        [self removeConstraint:self.labelSpinnerDistanceConstraint];
+    }
+    if (self.labelSpinnerMarginConstraint) {
+        [self removeConstraint:self.labelSpinnerMarginConstraint];
+    }
+    
+    NSLayoutAttribute labelAttribute;
+    NSLayoutAttribute spinnerAttribute;
+    switch (self.labelPosition) {
+        case SWLabelPositionBelow:
+            labelAttribute = NSLayoutAttributeTop;
+            spinnerAttribute = NSLayoutAttributeBottom;
+            break;
+        case SWLabelPositionAbove:
+            labelAttribute = NSLayoutAttributeBottom;
+            spinnerAttribute = NSLayoutAttributeTop;
+            break;
+        case SWLabelPositionLeft:
+            labelAttribute = NSLayoutAttributeRight;
+            spinnerAttribute = NSLayoutAttributeLeft;
+            break;
+        case SWLabelPositionRight:
+            labelAttribute = NSLayoutAttributeLeft;
+            spinnerAttribute = NSLayoutAttributeRight;
+            break;
+    }
+    self.labelSpinnerDistanceConstraint = [NSLayoutConstraint constraintWithItem:self.label attribute:labelAttribute relatedBy:NSLayoutRelationEqual toItem:self.spinner attribute:spinnerAttribute multiplier:1.0 constant:self.labelSpinnerMargin];
+    [self addConstraint:self.labelSpinnerDistanceConstraint];
+    
+    if (self.labelPosition == SWLabelPositionAbove
+        || self.labelPosition == SWLabelPositionBelow) {
+        self.labelSpinnerMarginConstraint = [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.spinner attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+    } else {
+        self.labelSpinnerMarginConstraint = [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.spinner attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+    }
+    [self addConstraint:self.labelSpinnerMarginConstraint];
 }
 
 @end

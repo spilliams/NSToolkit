@@ -20,7 +20,7 @@
 @end
 
 @interface SWActivityIndicator : NSView
-@property (weak) id<SWActivityIndicatorDelegate>delegate;
+@property (nonatomic, weak) id<SWActivityIndicatorDelegate>delegate;
 /// Shows the indicator.
 - (void)show;
 /// Returns YES if the indicator was successfully hidden, NO if not
@@ -29,11 +29,11 @@
 - (void)forceHide;
 
 /// LnF
-@property (strong) NSColor *backgroundColor;
-@property (assign) BOOL drawsBackground;
-@property (assign) CGFloat cornerRadius;
-@property (strong, readonly) YRKSpinningProgressIndicator *spinner;
-@property (strong, readonly) NSTextField *label;
+@property (nonatomic, strong) NSColor *backgroundColor;
+@property (nonatomic, assign) BOOL drawsBackground;
+@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, strong, readonly) YRKSpinningProgressIndicator *spinner;
+@property (nonatomic, strong, readonly) NSTextField *label;
 typedef NS_ENUM(NSInteger, SWLabelPosition) {
     SWLabelPositionBelow = 0,
     SWLabelPositionLeft,
@@ -41,12 +41,12 @@ typedef NS_ENUM(NSInteger, SWLabelPosition) {
     SWLabelPositionRight,
 };
 /// Defaults to 100, 100
-@property (assign) CGSize spinnerSize;
+@property (nonatomic, assign) CGSize spinnerSize;
 /// Defaults to Below
-@property (assign) SWLabelPosition labelPosition;
+@property (nonatomic, assign) SWLabelPosition labelPosition;
 /// Defaults to 10
-@property (assign) CGFloat labelSpinnerMargin;
+@property (nonatomic, assign) CGFloat labelSpinnerMargin;
 /// Defaults to 10, 10, 10, 10
-@property (assign) NSEdgeInsets edgeInsets;
+@property (nonatomic, assign) NSEdgeInsets edgeInsets;
 
 @end
