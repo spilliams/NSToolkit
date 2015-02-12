@@ -7,6 +7,8 @@
 
 #import "SWActivityIndicator.h"
 
+#define LOG NO
+
 @interface SWActivityIndicator ()
 @property (assign) int counter;
 @property (strong) NSView *containerView;
@@ -41,6 +43,7 @@
 - (void)commonInit {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        if (LOG) NSLog(@"[NAI] commonInit");
         self.counter = 0;
         [self setHidden:YES];
         self.labelSpinnerMargin = 10;
@@ -110,9 +113,9 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([self.label isEqual:object] && [keyPath isEqualToString:@"stringValue"]) {
-        NSLog(@"[NAI] observed change to label stringValue");
+        if (LOG) NSLog(@"[NAI] observed change to label stringValue");
         [self.label sizeToFit];
-        NSLog(@"  new frame is %@", NSStringFromRect(self.label.frame));
+        if (LOG) NSLog(@"  new frame is %@", NSStringFromRect(self.label.frame));
         [self updateContainerInternalConstraints];
     }
 }
@@ -129,15 +132,18 @@
 #pragma mark - Show/Hide
 
 - (void)show {
+    if (LOG) NSLog(@"[NAI] show");
     NSTimeInterval delay = 0;
     if (self.hidden
         && self.delegate
         && [self.delegate respondsToSelector:@selector(activityIndicatorWillShow:)]) {
         delay = [self.delegate activityIndicatorWillShow:self];
     }
+    if (LOG) NSLog(@"  delay %.2f", delay);
     [self performSelector:@selector(finishShowing) withObject:nil afterDelay:delay];
 }
 - (void)finishShowing {
+    if (LOG) NSLog(@"[NAI] finishShowing");
     self.counter++;
     [self updateHidden];
     [self.spinner startAnimation:self];
@@ -148,12 +154,15 @@
     }
 }
 - (void)hide {
+    if (LOG) NSLog(@"[NAI] hide");
     [self hideForced:NO];
 }
 - (void)forceHide {
+    if (LOG) NSLog(@"[NAI] forceHide");
     [self hideForced:YES];
 }
 - (void)hideForced:(BOOL)forced {
+    if (LOG) NSLog(@"[NAI] hideForced:%@", forced ? @"YES" : @"NO");
     self.counter--;
     if (forced) self.counter = 0;
     if (self.counter < 0) self.counter = 0;
@@ -164,9 +173,11 @@
         && [self.delegate respondsToSelector:@selector(activityIndicatorWillHide:)]) {
         delay = [self.delegate activityIndicatorWillHide:self];
     }
+    if (LOG) NSLog(@"  delay %.2f", delay);
     [self performSelector:@selector(finishHiding) withObject:nil afterDelay:delay];
 }
 - (void)finishHiding {
+    if (LOG) NSLog(@"[NAI] finishHiding");
     [self updateHidden];
     if (self.counter == 0) {
         [self.spinner stopAnimation:self];
@@ -183,6 +194,7 @@
 #pragma mark - Constraints
 
 - (void)setLabelSpinnerMargin:(CGFloat)labelSpinnerMargin {
+    if (LOG) NSLog(@"[NAI] setLabelSpinnerMargin");
     _labelSpinnerMargin = labelSpinnerMargin;
     if (self.labelSpinnerMarginConstraint) {
         [self.labelSpinnerMarginConstraint setConstant:labelSpinnerMargin];
@@ -191,13 +203,15 @@
     }
 }
 - (void)setLabelPosition:(SWLabelPosition)labelPosition {
+    if (LOG) NSLog(@"[NAI] setLabelPosition");
     _labelPosition = labelPosition;
     [self updateContainerInternalConstraints];
 }
 - (void)updateContainerInternalConstraints {
+    if (LOG) NSLog(@"[NAI] updateContainerInternalConstraints");
     // nil check...
     if (self.label == nil || self.spinner == nil) {
-        NSLog(@"  one or more subviews is nil. returning");
+        if (LOG) NSLog(@"  one or more subviews is nil. returning");
         return;
     }
     
@@ -208,6 +222,7 @@
     if (self.labelSpinnerMarginConstraint) {
         [self.containerView removeConstraint:self.labelSpinnerMarginConstraint];
     }
+    if (LOG) NSLog(@"  container internals after clearing: %@", self.containerView.constraints);
     
     // do some initial setup
     NSMutableArray *internalConstraints = [NSMutableArray new];
@@ -219,6 +234,9 @@
     NSString *perpendicular = isVertical ? @"H" : @"V";
     NSString *first = labelFirst ? @"label" : @"spinner";
     NSString *second = labelFirst ? @"spinner" : @"label";
+    if (LOG) NSLog(@"  isVertical? %@. labelFirst? %@. normal %@, perpendicular %@, first %@, second %@",
+          isVertical ? @"YES" : @"NO", labelFirst ? @"YES" : @"NO",
+          normal, perpendicular, first, second);
     
     // formats for the views in their superview
     [formats addObject:[NSString stringWithFormat:@"%@:|-(>=0)-[spinner]-(>=0)-|", perpendicular]];
@@ -245,6 +263,7 @@
     
     // finally, apply all to view
     self.containerInternalConstraints = internalConstraints;
+    if (LOG) NSLog(@"  internal constraints to apply: %@", internalConstraints);
     [self.containerView addConstraints:self.containerInternalConstraints];
 }
 
