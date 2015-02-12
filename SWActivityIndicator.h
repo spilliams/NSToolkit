@@ -27,6 +27,14 @@
 - (void)activityIndicatorDidHide:(SWActivityIndicator *)activityIndicator;
 @end
 
+/** An activity indicator!
+ - Will respond to direct messages to `show` and `hide`, but will also receive the notifications `kSWActivityIndicatorShowNotification` and `kSWActivityIndicatorHideNotification`.
+ - Makes heavy internal use of NSLayoutConstraints.
+ - Also depends on YRKSpinningProgressIndicator ( https://github.com/kelan/YRKSpinningProgressIndicator )
+ - Its UI can be configured by manipulating the properties `backgroundColor`, `drawsBackground`, `cornerRadius`, `spinner`, `label`, `spinnerSize`, `labelPosition`, `labelSpinnerMargin`, `edgeInsets`, `horizontalAlignment` and `verticalAlignment`.
+ - Sends messages to its delegate where appropriate, signaling that the indicator is about to show, has shown, is about to hide or has hidden.
+ - If the delegate returns a non-zero result for either of the "is about to" messages, the indicator will wait for that amount of time before hiding itself (yes, it actually uses `setHidden:`). This is useful in case you want to "hide" the indicator by animating it offscreen (or animating its opacity).
+ */
 @interface SWActivityIndicator : NSView
 @property (nonatomic, weak) id<SWActivityIndicatorDelegate>delegate;
 /// Shows the indicator.
@@ -42,7 +50,7 @@
 @property (nonatomic, assign) CGFloat cornerRadius;
 @property (nonatomic, strong, readonly) YRKSpinningProgressIndicator *spinner;
 @property (nonatomic, strong, readonly) NSTextField *label;
-/// Defaults to 100, 100
+/// Defaults to 20, 20
 @property (nonatomic, assign) CGSize spinnerSize;
 typedef NS_ENUM(NSInteger, SWLabelPosition) {
     SWLabelPositionBelow = 0,
@@ -56,5 +64,14 @@ typedef NS_ENUM(NSInteger, SWLabelPosition) {
 @property (nonatomic, assign) CGFloat labelSpinnerMargin;
 /// Defaults to 10, 10, 10, 10
 @property (nonatomic, assign) NSEdgeInsets edgeInsets;
+typedef NS_ENUM(NSInteger, SWAlignment) {
+    SWAlignmentCenter,
+    SWAlignmentBegin,   // left, top
+    SWAlignmentEnd      // right, bottom
+};
+/// Defaults to Center
+@property (nonatomic, assign) SWAlignment horizontalAlignment;
+/// Defaults to Center
+@property (nonatomic, assign) SWAlignment verticalAlignment;
 
 @end
