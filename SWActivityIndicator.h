@@ -28,6 +28,7 @@
 @end
 
 /** An activity indicator!
+ - Can be operated either as a singleton or as a regular instance.
  - Will respond to direct messages to `show` and `hide`, but will also receive the notifications `kSWActivityIndicatorShowNotification` and `kSWActivityIndicatorHideNotification`.
  - Makes heavy internal use of NSLayoutConstraints.
  - Also depends on YRKSpinningProgressIndicator ( https://github.com/kelan/YRKSpinningProgressIndicator )
@@ -36,6 +37,7 @@
  - If the delegate returns a non-zero result for either of the "is about to" messages, the indicator will wait for that amount of time before hiding itself (yes, it actually uses `setHidden:`). This is useful in case you want to "hide" the indicator by animating it offscreen (or animating its opacity).
  */
 @interface SWActivityIndicator : NSView
++ (SWActivityIndicator *)defaultIndicator;
 @property (nonatomic, weak) id<SWActivityIndicatorDelegate>delegate;
 /// Shows the indicator.
 - (void)show;

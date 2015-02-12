@@ -117,6 +117,15 @@
     }
 }
 
++ (SWActivityIndicator *)defaultIndicator {
+    static SWActivityIndicator *shared = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shared = [[self alloc] init];
+    });
+    return shared;
+}
+
 #pragma mark - Show/Hide
 
 - (void)show {
