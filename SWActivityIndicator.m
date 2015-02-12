@@ -18,6 +18,7 @@
 @property (strong) NSLayoutConstraint *labelSpinnerMarginConstraint;
 @property (strong) NSArray *spinnerSizeConstraints;
 @property (strong) NSArray *containerPositionConstraints;
+@property (strong) NSLock *counterLock;
 @end
 
 @implementation SWActivityIndicator
@@ -45,6 +46,7 @@
     dispatch_once(&onceToken, ^{
         if (LOG) NSLog(@"[NAI] commonInit");
         self.counter = 0;
+        self.counterLock = [NSLock new];
         [self setHidden:YES];
         self.labelSpinnerMargin = 10;
         self.edgeInsets = NSEdgeInsetsMake(10, 10, 10, 10);
@@ -144,7 +146,11 @@
 }
 - (void)finishShowing {
     if (LOG) NSLog(@"[NAI] finishShowing");
+    
+    [self.counterLock lock];
     self.counter++;
+    [self.counterLock unlock];
+    
     [self updateHidden];
     [self.spinner startAnimation:self];
     
@@ -163,9 +169,12 @@
 }
 - (void)hideForced:(BOOL)forced {
     if (LOG) NSLog(@"[NAI] hideForced:%@", forced ? @"YES" : @"NO");
+    
+    [self.counterLock lock];
     self.counter--;
     if (forced) self.counter = 0;
     if (self.counter < 0) self.counter = 0;
+    [self.counterLock unlock];
     
     NSTimeInterval delay = 0;
     if (self.counter == 0
