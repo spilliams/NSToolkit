@@ -13,6 +13,7 @@
 @implementation NSString(SizeHelpers)
 - (CGSize)sizeWithFont:(NSFont *)font maxWidth:(CGFloat)maxWidth
 {
+    if (LOG) NSLog(@"[SSH] sizeWithFont:%@ maxWidth:%f", font.familyName, maxWidth);
     NSTextStorage *textStorage = [[NSTextStorage alloc] initWithString:self];
     NSTextContainer *textContainer = [[NSTextContainer alloc] initWithContainerSize:NSMakeSize(maxWidth, FLT_MAX)];
     ;
@@ -27,6 +28,7 @@
 - (CGFloat)largestPointSizeThatFitsSize:(CGSize)rectSize withFont:(NSFont *)font minimumPointSize:(CGFloat)minimumPointSize
 {
     if (LOG) NSLog(@"[SSH] largestPointSizeThatFitsSize %@ min %.2f", NSStringFromSize(rectSize), minimumPointSize);
+    if ([self isEqualToString:@""]) return minimumPointSize;
     CGFloat low = minimumPointSize;
     CGFloat high = low;
     
@@ -35,6 +37,7 @@
     // determine high using binary search
     NSFont *highFont = [NSFont fontWithName:font.fontName size:high];
     while ([self sizeWithFont:highFont maxWidth:rectSize.width].height <= rectSize.height) {
+        if (LOG) NSLog(@"    trying %.2f. size is %@", high, NSStringFromSize([self sizeWithFont:highFont maxWidth:rectSize.width]));
         high = high * 2.0;
         highFont = [NSFont fontWithName:font.fontName size:high];
     }

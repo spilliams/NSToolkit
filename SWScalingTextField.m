@@ -45,6 +45,7 @@
     self.correctionFactor = -1;
 }
 - (void)initializeCorrectionFactor {
+    if (LOG) NSLog(@"[STF] initializeCorrectionFactor");
     if (self.correctionFactor != -1) return;
     
     // we have a frame and a font.pointSize
@@ -62,14 +63,18 @@
     
     [self initializeCorrectionFactor];
     
-    CGFloat newPointSize = [self.stringValue largestPointSizeThatFitsSize:dirtyRect.size withFont:self.font minimumPointSize:self.minimumPointSize];
-    newPointSize *= self.correctionFactor;
-    if (newPointSize < self.minimumPointSize) newPointSize = self.minimumPointSize;
-    if (newPointSize != self.font.pointSize) {
-        self.font = [NSFont fontWithName:self.font.fontName size:newPointSize];
-        if (self.scalingDelegate
-            && [self.scalingDelegate respondsToSelector:@selector(scalingTextField:changedFontToPointSize:)]) {
-            [self.scalingDelegate scalingTextField:self changedFontToPointSize:newPointSize];
+    // only resize if string value exists!
+    if (self.stringValue
+        && self.stringValue.length != 0) {
+        CGFloat newPointSize = [self.stringValue largestPointSizeThatFitsSize:dirtyRect.size withFont:self.font minimumPointSize:self.minimumPointSize];
+        newPointSize *= self.correctionFactor;
+        if (newPointSize < self.minimumPointSize) newPointSize = self.minimumPointSize;
+        if (newPointSize != self.font.pointSize) {
+            self.font = [NSFont fontWithName:self.font.fontName size:newPointSize];
+            if (self.scalingDelegate
+                && [self.scalingDelegate respondsToSelector:@selector(scalingTextField:changedFontToPointSize:)]) {
+                [self.scalingDelegate scalingTextField:self changedFontToPointSize:newPointSize];
+            }
         }
     }
     
